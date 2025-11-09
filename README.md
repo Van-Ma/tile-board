@@ -15,9 +15,9 @@ Interactive Lab is a React-based drag-and-drop tile board project. Users can sel
 
 ## Instructions
 1. Install dependencies
-```npm install
+```npm install```
 2. Start development server
-```npm start
+```npm start```
 
 ## Usage
 
