@@ -1,0 +1,195 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  overscroll-behavior: none;
+  overflow: auto;
+  height: 1000px;
+}
+
+// outside of grid area
+.droppable-area {
+  position: absolute;
+  inset: 0;
+}
+
+// tile selection
+.carousel-container {
+  @include flex-center;
+  flex-direction: row;
+  width: 90%;
+  max-width: 1200px;
+  min-width: 400px;
+  height: 100px;
+  gap: 20px;
+  margin: 50px auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  position: relative;
+
+// left-right scroll buttons
+  .arrow {
+    @include flex-center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 0, 0, 0.8);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+
+  .arrow.left { left: 10px; }
+  .arrow.right { right: 10px; }
+
+  .carousel-view {
+    overflow: hidden;
+    width: 80%;
+  }
+
+  .carousel-track {
+    @include flex-center;
+    gap: 12px;
+    width: 100%;
+    transition: transform 0s ease-in-out;
+  }
+}
+
+// tile object
+.snap-item {
+  @include flex-center;
+  aspect-ratio: 1;
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+}
+
+// grid-container
+.snap-container {
+  @include flex-center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+}
+
+// grid
+.snap-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  grid-template-rows: repeat(3, 200px);
+  gap: 10px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+//grid square
+.snap-square {
+  @include flex-center;
+  width: 200px;
+  height: 200px;
+  background-color: #ddd;
+  position: relative;
+  margin-top: 10px;
+  cursor: pointer;
+
+  &.occupied { background-color: white; }
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    top: 0;
+    left: 0;
+
+    &:hover { transform: scale(1.1); z-index: 99; }
+  }
+}
+
+/* small devices */
+@media (max-width: 900px) {
+  .carousel-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 10px;
+    width: 80%;
+
+    .arrow { display: none !important; }
+    .carousel-view {
+      width: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      display: flex;
+      white-space: nowrap;
+    }
+
+    .carousel-track {
+      flex-wrap: nowrap;
+      width: max-content;
+      justify-content: flex-start;
+      background-color: transparent;
+      padding: 50px 0;
+      box-sizing: border-box;
+      transition: none;
+    }
+  }
+
+  .snap-container {
+    position: static;
+    transform: none;
+    width: 100%;
+    align-items: center;
+  }
+
+  .snap-grid {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 6px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .snap-square {
+    width: 100px;
+    height: 100px;
+    margin-top: 6px;
+
+    img { width: 100%; height: 100%; object-fit: contain; }
+  }
+
+  .snap-item { width: 80px; height: 80px; }
+}
+
+/* smaller height */
+@media (min-width: 900px) and (max-height: 1001px) {
+  .snap-container { zoom: 0.5; top: 800px; }
+}
