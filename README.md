@@ -3,7 +3,7 @@
 ## Overview
 Interactive Lab is a React-based drag-and-drop tile board project. Users can select colorful tiles from a carousel and arrange them on a 3x3 grid. Tiles can also be dragged back to the selection area. The project supports both mouse and touch interactions and includes a custom drag ghost image for a smooth user experience.
 ## Preview
-!(public/preview/tileboard.png)
+![TileBoard Preview](public/preview/tileboard.png)
 ## Features
 - **Drag-and-drop tiles**: Move tiles from the carousel to the grid and vice versa.
 - **3x3 droppable grid**: Tiles can be placed in any square, swapping positions if the square is occupied.
