@@ -114,31 +114,19 @@ const CustomDragLayer = ({ snapObjects }) => {
 
 function TileBoard() {
     // define tile objects
-    const initialSnapObjects = [
-        { id: 1, image: '/snap/1.png', alt: 'shrimp', color: '#FFD633', position: null },
-        { id: 2, image: '/snap/2.png', alt: 'watermelon', color: '#0062D1', position: null },
-        { id: 3, image: '/snap/3.png', alt: 'bug', color: '#FF8025', position: null },
-        { id: 4, image: '/snap/4.png', alt: 'tomato', color: '#66CC2F', position: null },
-        { id: 5, image: '/snap/6.png', alt: 'monstera', color: '#FFD633', position: null },
-        { id: 6, image: '/snap/7.png', alt: 'aloe', color: '#FF4433', position: null },
-        { id: 7, image: '/snap/9.png', alt: 'butterfly', color: '#FFD633', position: null },
-        { id: 8, image: '/snap/11.png', alt: 'carrot', color: '#3E0074', position: null },
-        { id: 9, image: '/snap/12.png', alt: 'toad', color: '#FF4433', position: null },
-        { id: 10, image: '/snap/13.png', alt: 'strawberry', color: '#FFD633', position: null },
-        { id: 11, image: '/snap/14.png', alt: 'watercan', color: '#FF4433', position: null },
-        { id: 12, image: '/snap/15.png', alt: 'fish', color: '#0062D1', position: null },
-        { id: 13, image: '/snap/16.png', alt: 'flower', color: '#FF4433', position: null },
-        { id: 14, image: '/snap/17.png', alt: 'cherry', color: '#FFD633', position: null },
-        { id: 15, image: '/snap/18.png', alt: 'sun', color: '#3E0074', position: null },
-        { id: 16, image: '/snap/19.png', alt: 'pot', color: '#0062D1', position: null },
-        { id: 17, image: '/snap/20.png', alt: 'star', color: '#3E0074', position: null },
-        { id: 18, image: '/snap/21.png', alt: 'cat', color: '#FF8025', position: null },
-        { id: 19, image: '/snap/22.png', alt: 'cactus', color: '#FFD633', position: null },
-        { id: 20, image: '/snap/24.png', alt: 'peapod', color: '#FF4433', position: null },
-        { id: 21, image: '/snap/28.png', alt: 'rocketship', color: '#0062D1', position: null },
-        { id: 22, image: '/snap/29.png', alt: 'caterpillar', color: '#FFD633', position: null },
-        { id: 23, image: '/snap/30.png', alt: 'dog', color: '#3E0074', position: null },
-    ];
+    const skipped = [5, 8, 10, 23, 25, 26, 27];
+    const colors = ['#E6D9CF', '#C9CBEF', '#E3BEEA', '#B7EBF2', '#FFF5B1', '#BFE8C2'];
+
+
+    const initialSnapObjects = Array.from({ length: 30 }, (_, i) => i + 1)
+        .filter(id => !skipped.includes(id))
+        .map(id => ({
+            id,
+            image: `/snap/${id}.png`,
+            alt: `snap-${id}`,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            position: null,
+        }));
 
     const [visibleCount, setVisibleCount] = useState(8);
     const [startIndex, setStartIndex] = useState(0);
