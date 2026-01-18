@@ -29,10 +29,3 @@ Use the left/right arrows to scroll through tiles in the carousel.
 
 On small devices, the carousel shows 5 tiles; on larger screens, it shows 8 tiles.
 
-## File Structure
-
-TileBoard.js – Main component handling tile logic, drag-and-drop, and grid rendering.
-
-TileBoard.scss – Styles for the carousel, tiles, grid, and drag interactions.
-
-package.json – Project metadata and dependencies.
